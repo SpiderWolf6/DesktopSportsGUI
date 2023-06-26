@@ -1,0 +1,13 @@
+# Select all button
+def soccer_all():
+    for widget in root.winfo_children():
+        if isinstance(widget, tk.Checkbutton):
+            if var_all.get() == True:
+                widget.select()
+                widget.config(bg=on_color)
+                selected_buttons.append(widget["text"])
+            else:
+                widget.deselect()
+                widget.config(bg=off_color)
+                selected_buttons.remove(widget["text"])
+            print(selected_buttons)
