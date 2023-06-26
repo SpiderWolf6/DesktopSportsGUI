@@ -1,0 +1,13 @@
+# Add Calendar
+def date_range(start, stop):
+    global dates  # If you want to use this outside of functions
+
+    dates = []
+    diff = (stop - start).days
+    for i in range(diff + 1):
+        day = start + timedelta(days=i)
+        dates.append(day)
+    if dates:
+        print(dates)  # Print it, or even make it global to access it outside this
+    else:
+        print('Make sure the end date is later than start date')
