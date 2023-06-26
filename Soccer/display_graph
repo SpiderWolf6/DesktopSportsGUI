@@ -1,0 +1,43 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+  
+def display_input():
+    print(selected_buttons)
+    print(metrics_variable.get())
+    print(fin_new["Player Name"].unique())
+
+    disp = fin_new[["Date", "Player Name", metrics_variable.get()]]
+    disp = disp.replace(r"_", "-", regex=True)
+    for value in disp["Date"]:
+        value = parser.parse(value, dayfirst=True)
+    disp["Date"] = pd.to_datetime(disp["Date"])
+    print(disp)
+
+    temp = []
+    for x in selected_buttons:
+        filter_name = disp["Player Name"].isin([x.title()])
+        disp_new = disp[filter_name]
+        for y in dates:
+            filter_date = disp_new["Date"].isin([y])
+            disp_fin = disp_new[filter_date]
+            temp.append(disp_fin)
+    test = pd.concat(temp)
+    test["Date"] = test["Date"].astype(str)
+    print(test)
+
+    plt.clf()
+    sns.set(color_codes=True)
+    sns.set(rc={'figure.figsize': (11.7, 8.27)})
+
+    if var_average.get() == True:
+        soccer_team_average.config(bg=on_color)
+        sns.lineplot(x=test["Date"], y=test[metrics_variable.get()]).set(title="Graph1")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+    else:
+        soccer_team_average.config(bg=off_color)
+        sns.barplot(x=test["Date"], y=test[metrics_variable.get()], hue=test["Player Name"]).set(
+            title="Graph1")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+
+    plt.show()
