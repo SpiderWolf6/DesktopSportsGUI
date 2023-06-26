@@ -1,0 +1,91 @@
+# SOCCER SQUAD PAGE
+def squad_page():
+    display_pick_sport.destroy()
+    soccer_button.destroy()
+
+    fp = open("C:/goutam/soham/Catapult/soccer.png", "rb")
+    image1 = PIL.Image.open(fp)
+    test = ImageTk.PhotoImage(image1)
+
+    label1 = tkinter.Label(image=test)
+    label1.image = test
+
+    # Position image
+    label1.place(x=0, y=0)
+
+    print(fin_new["Player Name"].unique())
+
+    data = {"Name": ["Eben Eichenwald", "Giles El-Assal", "Anselm", "Farzad Hoque ",
+                     "Nicholas Jung", "Martin I", "Ryan Petrauskas",
+                     "Jack", "Aden", "Mitchell Deutsch",
+                     "Patrick Kawulok", "Kaeden Ruparel", "Soham Mukherjee", "Frederik", "Duncan",
+                     "Michael",
+                     "Ethan", "Rafael Zornoza ", "Noah", "Gabriel", "Stefan Broge", "John Kennedy"],
+            "Position": ["LB", "LCB", "RCB", "RB", "LCM", "CM", "RCM", "LW", "ST", "RW", "SUB", "SUB",
+                         "SUB", \
+                         "SUB", "SUB", "SUB", "SUB", "SUB", "SUB", "SUB", "SUB", "SUB"],
+            "Number": ["#34", "#15", "#20", "#9", "#16", "#8", "#6", "#30", "#11", "#5",
+                       "#55", "#4", "#19", "23", "#25", "#18", "#21", "#27", "#12", "#33", "#36", "#35"]}
+    map_key = pd.DataFrame(data=data)
+    print(map_key)
+
+    # Subs list
+    subs = Label(root, text="SUBSTITUTES")
+    subs.place(x=1100, y=0)
+
+    gk = Button(root, text="GOALIE", bg="dark blue", fg="white")
+    gk.place(x=0, y=325)
+
+    var_list = {}
+    var_list_new = []
+    button_list = {}
+    button_list_new = []
+    for i in map_key.index:
+        button_name = map_key._get_value(i, "Name")
+        player_position = map_key._get_value(i, "Position")
+        all_words = button_name.split()
+        first_word = all_words[0]
+        button_number = map_key._get_value(i, "Number")
+
+        var_list[i] = BooleanVar()
+        var_list_new.append(var_list[i])
+        button_list[i] = Checkbutton(root, text=button_number, bg=off_color, variable=var_list[i])
+        button_list[i].config(command=on_check)
+        button_list_new.append(button_list[i])
+
+        if player_position == "LB":
+            button_list[i].place(x=300, y=100)
+        elif player_position == "LCB":
+            button_list[i].place(x=300, y=250)
+        elif player_position == "RCB":
+            button_list[i].place(x=300, y=400)
+        elif player_position == "RB":
+            button_list[i].place(x=300, y=550)
+        elif player_position == "LCM":
+            button_list[i].place(x=500, y=200)
+        elif player_position == "CM":
+            button_list[i].place(x=500, y=325)
+        elif player_position == "RCM":
+            button_list[i].place(x=500, y=450)
+        elif player_position == "LW":
+            button_list[i].place(x=700, y=100)
+        elif player_position == "ST":
+            button_list[i].place(x=700, y=325)
+        elif player_position == "RW":
+            button_list[i].place(x=700, y=550)
+        elif player_position == "SUB":
+            button_list[i].pack(side=RIGHT)
+
+    var_all = BooleanVar()
+    soccer_select_all = Checkbutton(root, text="SELECT ALL", variable=var_all, command=soccer_all,
+                                    bg=off_color)
+    soccer_select_all.place(x=1000, y=0)
+
+    def squad_to_soccer():
+        time.sleep(1)
+        for widget in root.winfo_children():
+            widget.destroy()
+        soccer_selections_page()
+
+    squad_to_soccer_button = Button(root, text="BACK", command=squad_to_soccer)
+    squad_to_soccer_button.place(x=1200, y=0)
