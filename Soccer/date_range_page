@@ -1,0 +1,30 @@
+# SOCCER DATE RANGE
+def date_slider():
+    time.sleep(1)
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    dt = date.today()
+    dt1 = date(2022, 8, 25)  # specific date Year, month , day
+    dt2 = date(2022, 9, 20)  # Maximum date in Year, month , day
+
+    date1 = tkcalendar.DateEntry(root, mindate=dt1, maxdate=dt2, font="Arial 14")
+    date1.pack(padx=10, pady=10)
+
+    to_print = Label(root, text="TO", font="Arial 14")
+    to_print.pack(pady=100)
+
+    date2 = tkcalendar.DateEntry(root, mindate=dt1, maxdate=dt2, font="Arial 14")
+    date2.pack(padx=10, pady=10)
+
+    range_on = Button(root, text='Set Range', command=lambda: date_range(date1.get_date(), date2.get_date()))
+    range_on.pack(padx=100, pady=100)
+
+    def date_to_soccer():
+        time.sleep(1)
+        for widget in root.winfo_children():
+            widget.destroy()
+        soccer_selections_page()
+
+    date_to_soccer_button = Button(root, text="BACK", command=date_to_soccer)
+    date_to_soccer_button.pack(side=BOTTOM)
