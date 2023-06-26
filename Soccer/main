@@ -1,0 +1,28 @@
+import tkinter
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+from ttkthemes import ThemedTk
+import tkcalendar
+from tkcalendar import Calendar
+import PIL.Image
+from PIL import Image
+from PIL import ImageTk
+import re
+import requests
+
+
+def start():
+    
+    root = Tk()  # create parent window
+    root.geometry("400x400") # set parent window size
+
+    off_color = "light blue"
+    on_color = "light green"
+    selected_buttons = []
+
+    
+    home()
+    root.mainloop()
+
+start()
