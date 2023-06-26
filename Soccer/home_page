@@ -1,0 +1,6 @@
+    def home():
+        display_pick_sport = Label(root, text="PICK YOUR SPORT")
+        display_pick_sport.pack()
+
+        soccer_button = Button(root, text="Boys Soccer 22-23", command=soccer_selections_page)
+        soccer_button.pack(padx=200, pady=200)
