@@ -1,0 +1,15 @@
+def on_check():  # this function will run on click on checkbutton
+    for var in var_list_new:
+        if var.get() == True:
+            index = var_list_new.index(var)
+            b = button_list_new[index]
+            b.config(bg=on_color)
+            if map_key.loc[index, "Name"] not in selected_buttons:
+                selected_buttons.append(map_key.loc[index, "Name"])
+        else:
+            index = var_list_new.index(var)
+            b = button_list_new[index]
+            b.config(bg=off_color)
+            if map_key.loc[index, "Name"] in selected_buttons:
+                selected_buttons.remove(map_key.loc[index, "Name"])
+    print(selected_buttons)
