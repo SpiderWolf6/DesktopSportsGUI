@@ -1,0 +1,35 @@
+def soccer_selections_page():
+
+    display_pick_sport.destroy()
+    soccer_button.destroy()
+    display_select_options=Label(root, text = "SELECT")
+    display_select_options.pack()
+
+    def back_home():
+        time.sleep(1)
+        for widget in root.winfo_children():
+            widget.destroy()
+        home()
+
+    session_button = Button(root, text="SESSION", command=date_slider)
+    session_button.pack(padx=50, pady=50)
+    squad_list_button = Button(root, text="SQUAD", command=squad_page)
+    squad_list_button.pack(padx=50, pady=50)
+
+    # ADD METRICS DROPDOWN
+    metrics_variable = StringVar(root)
+    metrics_variable.set("Distance (miles)")  # default value
+
+    metrics_list = OptionMenu(root, metrics_variable, "Distance (miles)", "Power Plays", "Player Load",
+                              "Top Speed (mph)", "Distance Per Min (m/min)")
+    metrics_list.pack(padx=25, pady=25)
+
+    var_average = BooleanVar()
+    soccer_team_average = Checkbutton(root, text="TEAM AVERAGE", variable=var_average, bg=off_color)
+    soccer_team_average.pack(padx=25, pady=25)
+
+    graph_button = Button(root, text="GRAPH", command=display_input)
+    graph_button.pack(padx=50, pady=50)
+
+    back_home_button = Button(root, text = "BACK", command=back_home)
+    back_home_button.pack(padx = 25, pady = 25)
